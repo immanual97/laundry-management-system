@@ -1,0 +1,31 @@
+
+{% load static %} 
+<html>
+
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+<title>login</title>
+<link rel="stylesheet" href=" {% static 'css/login.css' %}">
+<div class="container" id="container">
+	<div class="form-container sign-in-container">
+		<form method="post">
+		{% csrf_token %}
+			<h1>Sign in</h1>
+			<input type="text" placeholder="Username" name="username" required/>
+			<input type="password" placeholder="Password" name="password" required/><br>
+			<button type="submit" name="login">Sign In</button>
+			{% for message in messages %}
+				<h3 style="color:red;"> {{ message }} </h3>
+			{% endfor %}
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<a href="{% url 'register' %}" style="text-decoration: none;border-radius: 20px;background-color: #FF4B2B ;color: #FFFFFF;font-size: 12px;font-weight: bold;padding: 12px 45px;cursor: pointer;" >Sign Up</a>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

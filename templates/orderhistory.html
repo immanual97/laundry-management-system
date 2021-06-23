@@ -1,0 +1,197 @@
+{% load static %} 
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/progressbar_barfiller.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animated-headline.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+</head>
+<title>orderhistory</title>
+<body>
+    <!-- ? Preloader Start -->
+    
+    <!-- Preloader Start -->
+	
+	<!-- Header Start -->
+    <header>
+      <div class="header-area">
+            <div class="main-header header-sticky">
+                <!-- Logo -->
+                <div class="header-left">
+                    <div class="logo">
+                        <a href="{% url 'index'%} "><img src="{% static 'img/logo/logo.png'%}" alt=""></a>
+                    </div>
+                    <div class="menu-wrapper  d-flex align-items-center">
+                        <!-- Main-menu -->
+                        <div class="main-menu d-none d-lg-block">
+                            <nav> 
+                                <ul id="navigation">                                                                                          
+                                    <li><a href="{% url 'index' %}">Home</a></li>
+                                    <li><a href="{% url 'services' %}">Services</a></li>
+                                     {% if user.is_authenticated %}
+                                    <li> Hai, {{user.first_name}}</li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div> 
+                <div class="header-right d-none d-lg-block">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'orderhistory' %}" class="header-btn2" style="color:white;">Profile</a>
+                    <a href="{% url 'logout' %}" class="header-btn2" style="color:white;">Logout</a>
+                    {% else %}
+                    <a href="accounts/login" class="header-btn2">Login</a>
+                    {% endif %}
+                </div
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+	<!-- Header End -->
+	
+    
+	<div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <p></p>
+            </div>
+            <ul class="list-unstyled components">
+            <h1 style="color:white;font-size:24px;margin-left:30px;">USER MENU</h1>
+				<li>
+                    <a href="{% url 'newlaundry' %}">New Laundry</a>
+                </li>
+                <li>
+                    <a href="{% url 'active' %}">Active Services</a>
+                </li>
+                <li class="active">
+                    <a href="{% url 'orderhistory' %}">Service History</a>
+                </li>
+				<li>
+                    <a href="{% url 'profileupdate' %}">Profile Update</a>
+                </li>
+                <li>
+                    <a href="{% url 'feedback' %}">Feedback</a>
+                </li>
+                <li>
+                    <a href="{% url 'changepassword' %}">Change Password</a>
+                </li>
+                {% if request.user.is_staff %}
+				<li>
+                    <a href="{% url 'changestatus' %}">Change Status</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+
+        <!-- Page Content  -->
+		<div id="content">
+            <div class="row user-details">
+                <div class="col-6"></div>
+				<div class="container" style="width:900px;">
+				<h4>History</h4>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>                                
+                                <th class="table-class">Order id</th>
+                                <th class="table-class">Date</th>
+                                <th class="table-class">Service</th>
+                                <th class="table-class">Total price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for hist in hist%}
+                            <tr>
+                                <td>{{hist.id}}</td>
+                                <td>{{hist.date}}</td>
+                                <td>{{hist.servicetypes}}</td>
+                                <td>{{hist.totalcost}}</td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+				
+				
+				</div>
+				
+            </div>
+        </div>	
+
+		
+		
+        
+    </div>
+
+
+
+<!-- JS here -->
+
+<script src="{% static 'js/vendor/modernizr-3.5.0.min.js'%}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{% static 'js/vendor/jquery-1.12.4.min.js'%}"></script>
+<script src="{% static 'js/popper.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{% static 'js/owl.carousel.min.js'%}"></script>
+<script src="{% static 'js/slick.min.js'%}"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static 'js/wow.min.js'%}"></script>
+<script src="{% static 'js/animated.headline.js'%}"></script>
+<script src="{% static 'js/jquery.magnific-popup.js'%}"></script>
+
+<!-- Date Picker -->
+<script src="{% static 'js/gijgo.min.js'%}"></script>
+<!-- Nice-select, sticky -->
+<script src="{% static 'js/jquery.nice-select.min.js'%}"></script>
+<script src="{% static 'js/jquery.sticky.js'%}"></script>
+<!-- Progress -->
+<script src="{% static 'js/jquery.barfiller.js'%}"></script>
+
+<!-- counter , waypoint,Hover Direction -->
+<script src="{% static 'js/jquery.counterup.min.js'%}"></script>
+<script src="{% static 'js/waypoints.min.js'%}"></script>
+<script src="{% static 'js/jquery.countdown.min.js'%}"></script>
+<script src="{% static 'js/hover-direction-snake.min.js'%}"></script>
+
+<!-- contact js -->
+<script src="{% static 'js/contact.js'%}"></script>
+<script src="{% static 'js/jquery.form.js'%}"></script>
+<script src="{% static 'js/jquery.validate.min.js'%}"></script>
+<script src="{% static 'js/mail-script.js'%}"></script>
+<script src="{% static 'js/jquery.ajaxchimp.min.js'%}"></script>
+
+<!-- Jquery Plugins, main Jquery -->	
+<script src="{% static 'js/plugins.js'%}"></script>
+<script src="{% static 'js/main.js'%}"></script>
+</body>
+</html>

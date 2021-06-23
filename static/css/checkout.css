@@ -1,0 +1,68 @@
+body{
+    width: 100%;
+    overflow: hidden;
+}
+.navbar-brand{
+    margin-left:10px;
+}
+ a.nav-link:hover{
+    color:#2bb80e;
+}
+a.nav-link{
+    color:rgba(0,0,0,.55);
+}
+.greenbox{
+  border: 7px solid #29a710;
+  margin-top:-7px;
+  margin-left:-7px;
+  margin-right: -7px;
+}
+.container{
+  display: inline-flex;
+  border: 7px solid #29a710;
+  margin: auto;
+  margin-top:10px;
+  margin-left: 10px;
+  width: 100%; 
+} 
+.container-cart{
+  position: absolute;
+
+  margin:20px;
+  margin-top:50px;
+  
+   
+}
+.container-pay{
+  position: static;
+ 
+  margin:auto;
+  margin-top:10px;
+  float: right;
+  margin-left: 20px;
+  padding: 50px;
+ 
+}
+
+ .card-details{
+	padding: 25px 25px 15px;
+}
+
+.card-details label{
+	font-size: 12px;
+	font-weight: 600;
+	margin-bottom: 15px;
+	color: #79818a;
+	text-transform: uppercase;
+}
+
+ .card-details button{
+	margin-top: 0.6em;
+	padding:12px 0;
+	font-weight: 600;
+}
+.date-separator{
+ 	margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
