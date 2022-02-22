@@ -232,9 +232,14 @@ def reports(request):
         if request.method == 'POST':
             fromdate=request.POST['fdate']
             todate=request.POST['tdate']
+            s=0
+            if Orders.objects.filter(date__gte=fromdate,date__lte=todate).order_by('id'):
+                ord=Orders.objects.filter(date__gte=fromdate,date__lte=todate).order_by('id')
+                for orders in ord:
+                    s=s+orders.totalcost
             order = Orders.objects.filter(date__gte=fromdate,date__lte=todate).order_by('id')
             messages.info(request,'Report Generated')
-            return render(request,'reports.html',{'order':order})
+            return render(request,'reports.html',{'order':order,'s':s})
         else:
             return render(request,'reports.html')
     
@@ -345,5 +350,7 @@ def cdelivery(request):
                 addid=ord.userid_id
                 add = Address.objects.get(userid_id=addid)
                 return render(request,'cdelivery.html',{'ord':ord,'add':add})
+        else:
+            return render(request,'cdelivery.html')
     else:
         return redirect("/")
