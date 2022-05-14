@@ -1,4 +1,5 @@
 from datetime import date
+from pickle import FALSE
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from .models import ClothType, Discounds, Feedback, Payment, ServiceType, Address,OrderNumber, Orders, Status
@@ -6,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 import datetime
 import time
+from django.db.models import Sum
 
 # Create your views here.
 
@@ -13,7 +15,7 @@ import time
 def newlaundry(request):
     if request.user.is_authenticated:
         if request.method=='POST':
-            date = datetime.date.today()
+            date = datetime.datetime.now()
             clothtype = request.POST.get('clothtype')
             no = request.POST.get('noofclothes')
             noofclothes=int(no)
@@ -242,7 +244,15 @@ def reports(request):
             return render(request,'reports.html',{'order':order,'s':s})
         else:
             return render(request,'reports.html')
-    
+
+def allreports(request):
+        if request.user.is_staff:
+            users = User.objects.filter(is_staff=False).count()
+            staffs = User.objects.filter(is_staff=True).count()
+            order = Orders.objects.count()
+            totalcost = Orders.objects.aggregate(Sum('totalcost'))
+            #listval = totalcost.values()
+            return render(request,'allreports.html',{'users':users,'staffs':staffs,'order':order,'totalcost':totalcost})
 
 def allorders(request):
     if request.user.is_staff:

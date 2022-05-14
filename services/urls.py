@@ -13,6 +13,7 @@ urlpatterns = [
     path('transaction',views.transaction,name="transaction"),
     path('adduser',views.adduser,name="adduser"),
     path('reports',views.reports,name="reports"),
+    path('allreports',views.allreports,name="allreports"),
     path('adddiscound',views.adddiscound,name="adddiscound"),
     path('allorders',views.allorders,name="allorders"),
     path('feedback',views.feedback,name="feedback"),

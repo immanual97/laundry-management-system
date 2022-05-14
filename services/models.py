@@ -22,7 +22,7 @@ class Status(models.Model):
     status = models.CharField(max_length=25)
 
 class Orders(models.Model):
-    date = models.DateField()
+    date = models.DateTimeField()
     clothtype = models.CharField(max_length=25,default=None)
     noofclothes = models.IntegerField()
     cost = models.IntegerField(default=0)

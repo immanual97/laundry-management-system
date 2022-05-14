@@ -132,37 +132,52 @@
                 
                 <div class="col-6"></div>
 				<div class="container" style="width:900px;">
-				<h4>Reports</h4>
+				<h4>Overall Reports</h4>
                 <form method="post">
                 {% csrf_token %}
                     <div style="margin-top:50px;" class="">
-                    <div>
-                        <input style="margin-bottom:40px;" type="date" name="fdate" required>From Date</input>
-                        <input style="margin-bottom:40px;margin-left:100px;" type="date" name="tdate" onload="getDate()" id="date" required>To Date</input>
-                        <input style="margin-left:100px;margin-bottom:40px;cursor:pointer;background:#6785FF;color:white;border:none;padding:10px;width:80px;" type="submit" name="report" value="Reports"/>
-
-                    </div>
+                    
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>                                
-                                <th class="table-class">Order ID</th>
-                                <th class="table-class">User ID</th>
-                                <th class="table-class">Total Cost</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             
-                        {%for order in order%}
                             <tr>
-                                <td>{{order.id}}</td>
-                                <td>{{order.userid}}</td>
-                                <td>{{order.totalcost}}</td>
+                                <td>
+                                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">No of Users</div>
+                                        <div class="card-body">
+                                          <p class="card-text">{{ users }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td>
+                                      <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">No of Staffs</div>
+                                        <div class="card-body">
+                                          <p class="card-text">{{ staffs }}</p>
+                                        </div>
+                                      </div>
+                                </td>
+                                <td>
+                                      <div class="card text-white bg-success mb-3" style="max-width: 28rem;">
+                                        <div class="card-header">Laundry Number</div>
+                                        <div class="card-body">
+                                          <p class="card-text">{{ order }}</p>
+                                        </div>
+                                      </div>
+                                </td>
+                                <td>
+                                      <div class="card text-white bg-danger mb-3" style="max-width: 28rem;">
+                                        <div class="card-header">Total Cost</div>
+                                        <div class="card-body">
+                                            <p class="card-text" style="color:white;">{{ totalcost }}</p>
+                                        </div>
+                                      </div>
+                                </td>
+                               
                             
                             </tr>
-                        {%endfor%}
-                        <td> Overall Amount </td>
-                        <td> </td>
-                        <td style="color:red;"> {{ s }} </td>
+                        
                         </tbody>
                     </table>
                     </div>
