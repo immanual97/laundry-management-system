@@ -251,8 +251,11 @@ def allreports(request):
             staffs = User.objects.filter(is_staff=True).count()
             order = Orders.objects.count()
             totalcost = Orders.objects.aggregate(Sum('totalcost'))
-            #listval = totalcost.values()
-            return render(request,'allreports.html',{'users':users,'staffs':staffs,'order':order,'totalcost':totalcost})
+            totc=list(totalcost.values())
+            for n in totc:
+                total_cost = n
+                print(total_cost)  
+                return render(request,'allreports.html',{'users':users,'staffs':staffs,'order':order,'totalcost':total_cost})
 
 def allorders(request):
     if request.user.is_staff:
@@ -357,6 +360,7 @@ def cdelivery(request):
     if request.user.is_staff:
         if Orders.objects.filter(homedelivery=True).exclude(statusid_id='6').exists():
             for ord in Orders.objects.filter(homedelivery=True).exclude(statusid_id='6'):
+                print('ord:',ord.userid_id)
                 addid=ord.userid_id
                 add = Address.objects.get(userid_id=addid)
                 return render(request,'cdelivery.html',{'ord':ord,'add':add})
